@@ -1,0 +1,19 @@
+#print Hello World
+
+#CS2640 1st Mips Assembly 
+#10/14/2022
+#Assignment "Print Hello World"
+
+.data
+	message: .asciiz "Hello World"
+.text 
+main:
+	li $v0, 4
+	la $a0, message
+	syscall
+	j exit
+	
+exit: 
+	li $v0, 10
+	syscall   
+

@@ -1,0 +1,66 @@
+#Loc Nguyen CS2640
+#10/17/2022
+#take in 2 user inputs and output greater input
+.data
+	message: .asciiz "Enter a number: "
+	greater: .asciiz "This is the greater number: " 
+	equal: .asciiz "The numbers are equal" 
+.text 
+main: 
+	#Print 1st message
+	li $v0,4
+	la $a0, message
+	syscall
+	
+	#Take user input
+	li $v0,5
+	syscall
+	#Move input to $s0
+	move $s0,$v0
+	
+	#Print 2nd message
+	li $v0,4
+	la $a0, message
+	syscall
+	
+	#Take user input
+	li $v0,5
+	syscall
+	#Move input 
+	move $s1,$v0
+	
+	#Compare two inputs
+	bgt $s1,$s0,prints1 #print S1
+	bgt $s0,$s1,prints0 #print s0
+	beq $s0,$s1,print #if equal, print equal message 
+prints1:
+	li $v0, 4
+	la $a0, greater
+	syscall 
+	li $v0, 1
+	la $a0,($s1)
+	syscall 
+	
+	j exit
+	
+prints0:
+	
+	li $v0, 4
+	la $a0, greater
+	syscall
+	li $v0, 1
+	la $a0, ($s0) 
+	syscall 
+	
+	j exit 
+print:
+	li $v0,4
+	la $a0,equal 
+	syscall
+	 
+	j exit 
+	
+exit: 
+	li $v0,10
+	syscall 
+	

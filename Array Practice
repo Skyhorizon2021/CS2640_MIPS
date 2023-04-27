@@ -1,0 +1,66 @@
+#CS2640
+#Date
+#Objective - perform operations with array
+
+.data
+array: .word 3,4,5
+result1: .asciiz "Result of array[0] + array[1] is "
+result2: .asciiz "\nResult of array[1] + array[2] is "
+result3: .asciiz "\nResult of array[0] + array[2] is "
+result4: .asciiz "\nResult of array[0] + array[1] + array[2] is "
+exitMsg: .asciiz "\nProgram finished"
+
+.text
+main:
+	#load array into register
+	la $s0, array
+	#load value of array element into register
+	lw $t0, 0($s0) #load 3 into $t0
+	lw $t1, 4($s0) #load 4 into $t1
+	lw $t2, 8($s0) #load 5 into $t2
+	
+	#add them
+	add $s1,$t0,$t1 #add 3 and 4
+	add $s2,$t1,$t2 #add 4 and 5
+	add $s3,$t0,$t2 #add 3 and 5
+	add $s4,$s1,$t2 #add 3,4, and 5
+	
+	#print output
+	li $v0, 4
+	la $a0, result1
+	syscall
+	li $v0, 1
+	la $a0, ($s1)
+	syscall
+	
+	li $v0, 4
+	la $a0, result2
+	syscall
+	li $v0, 1
+	la $a0, ($s2)
+	syscall
+	
+	li $v0, 4
+	la $a0, result3
+	syscall
+	li $v0, 1
+	la $a0, ($s3)
+	syscall
+	
+	li $v0, 4
+	la $a0, result4
+	syscall
+	li $v0, 1
+	la $a0, ($s4)
+	syscall
+	
+	j exit
+	
+exit:
+	li $v0,4
+	la $a0, exitMsg
+	syscall
+	li $v0,10
+	syscall
+	
+	

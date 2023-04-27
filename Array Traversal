@@ -1,0 +1,8 @@
+#CS2640
+#Date
+#Objective - Array Traversing
+
+.data
+array: .word 1,2,3,4,5
+
+.text
